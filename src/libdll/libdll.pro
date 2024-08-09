@@ -8,4 +8,4 @@ DESTDIR = "$$PWD/../../bin"
 DLLDESTDIR = "$$PWD/../../bin"
 
 # CONFIG += staticlib
-# CONFIG += console
+#CONFIG += console
