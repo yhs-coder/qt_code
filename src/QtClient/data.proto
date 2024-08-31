@@ -1,0 +1,110 @@
+
+syntax = "proto3";
+package Protocol;
+
+message Ethernet {
+    string dst = 1;
+    string src = 2;
+}
+
+message Arp {
+    uint32 hardware_type = 1; // 使用1开始的连续字段编号
+    uint32 protocol_type = 2; // IPv4地址的协议类型是0x0800，这里使用十六进制表示
+    uint32 hardware_size = 3; // 硬件地址的字节数
+    uint32 protocol_size = 4; // 协议地址的字节数
+    uint32 op_type = 5;       // ARP请求或应答的操作类型
+    string source_mac = 6;     // 发送方MAC地址
+    string source_ip = 7;     // 发送方IP地址
+    string target_mac = 8;     // 目标MAC地址
+    string target_ip = 9;     // 目标IP地址
+}
+
+message Ip {
+    uint32 version = 1;           // IP版本号，通常为4
+    uint32 header_len = 2;        // 首部长度，单位为32位字（即4字节）
+    uint32 service_type = 3;      // 分隔服务类型
+    uint32 total_len = 4;         // 总长度，单位为字节
+    uint32 identification = 5;    // 标识符
+    uint32 flags = 6;             // 分段标志位
+    uint32 fragment_offset = 7;   // 分段偏移量，单位为8字节
+    uint32 ttl = 8;               // 时间生存值
+    uint32 protocol = 9;          // 协议类型
+    uint32 checksum = 10;         // 校验和
+    string source_ip = 11;        // 源IP地址
+    string target_ip = 12;        // 目标IP地址
+}
+
+message Udp {
+    uint32 source_port = 1;  // 源端口
+    uint32 target_port = 2;  // 目的端口
+    uint32 total_size = 3;   // 总长度
+    uint32 check_sum = 4;    // 校验值
+}
+
+message Dns {
+    uint32 transaction_id = 1;        // 会话标识
+    bool is_response = 2;             // QR：查询 / 响应标志
+    uint32 op_code = 3;               // 操作码
+    bool is_authenticated_answer = 4; // AA：应答是否为该域名的权威解析服务器
+    bool is_truncated = 5;     // TC：是否截断
+    bool is_recursion_desired = 6;    // RD：期望递归
+    bool is_recursion_available = 7;  // RA：可用递归
+    uint32 reply_code = 8;            // 返回码
+
+    uint32 question_amount = 9;       // 查询区域数量
+    uint32 answer_amount = 10;        // 回答区域数量
+    uint32 authority_amount = 11;     // 授权区域数量
+    uint32 additional_amount = 12;    // 附加区域数量
+}
+
+message Tcp {
+    uint32 source_port = 1;    // 源端口
+    uint32 target_port = 2;    // 目的端口
+    uint32 seq_num = 3;        // 序号
+    uint32 ack_num = 4;        // 确认号
+    uint32 header_len = 5;     // TCP头部长度/数据偏移
+    uint32 reserve = 6;        // 保留字段
+    bool urg = 7;              // URG字段
+    bool syn = 8;              // SYN字段
+    bool ack = 9;              // ACK字段
+
+    uint32 window = 10;        // 窗口字段
+    uint32 checksum = 11;      // 校验和
+    uint32 urgent_pointer = 12; // 紧急指针
+    uint32 flags = 13;         // 标志位，可以定义一个枚举来表示不同的标志
+}
+
+
+// 定义HTTP请求消息体
+message HttpRet {
+    map<string, string> headers = 1;// 通用Http消息体
+    string method = 2;              // 请求方法
+    string path = 3;                // 请求资源路径
+    string http_version = 4;        // HTTP版本
+    string body = 5;                // 请求体或响应体
+}
+
+// 定义HTTP响应消息体
+message HttpRes {
+     map<string, string> headers = 1;// 通用Http消息体
+    string http_version = 2;        // HTTP版本
+    string status_code = 3;         // 状态码
+    string phrase = 4;              // 状态描述
+    string body = 5;                // 请求体或响应体
+}
+
+message ProtocolData
+{
+    Ethernet eth = 1;   // 以太网
+    Arp arp = 2;        // arp协议
+    Ip ip = 3;          // ip协议
+    Udp udp = 4;        // udp协议
+    Dns dns = 5;        // dns协议
+    Tcp tcp = 6;        // tcp协议
+    HttpRet http_request = 7;   // http请求
+    HttpRes http_response = 8; // http响应
+    uint32 type = 9;                // 协议类型
+    string time = 10;
+    uint32 caplen = 11;
+
+}
