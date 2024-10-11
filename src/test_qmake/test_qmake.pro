@@ -8,7 +8,7 @@ LIBS += -L$$PWD/../../lib/ -lopencv_world320
 DESTDIR += $$PWD/../../bin
 
 # 生成的文件名
-TARGET = test
+TARGET = test_qmake
 
 SOURCES += main.cpp 
 CONFIG += c++11 console
