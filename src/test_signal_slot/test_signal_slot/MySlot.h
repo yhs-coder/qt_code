@@ -5,5 +5,6 @@ class MySlot : public QObject
 	Q_OBJECT
 public slots:
 	void eat();
+	void eat(std::string msg);
 };
 

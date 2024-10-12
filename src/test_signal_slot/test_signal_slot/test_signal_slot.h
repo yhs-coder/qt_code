@@ -19,7 +19,8 @@ signals:
 public slots:
     void ViewSlot();
     void TestSlot();
-
+    void HungrySlot();
+    void EatOther();
 private:
     Ui::test_signal_slotClass ui;
     Test* m_t;

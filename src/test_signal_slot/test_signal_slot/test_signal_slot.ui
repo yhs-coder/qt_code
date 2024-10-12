@@ -65,6 +65,19 @@
     <string>TestSlot</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="hungry">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>350</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>发射自定义信号：hungry</string>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
@@ -78,8 +91,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>229</x>
-     <y>186</y>
+     <x>239</x>
+     <y>116</y>
     </hint>
     <hint type="destinationlabel">
      <x>243</x>
@@ -111,7 +124,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>277</x>
-     <y>308</y>
+     <y>228</y>
     </hint>
     <hint type="destinationlabel">
      <x>371</x>
