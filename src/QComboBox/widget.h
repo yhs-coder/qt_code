@@ -16,8 +16,16 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
+    void setResult();
+private slots:
+    void onCboUniversityChanged(int index);
+    void onCboProvinceChanged(int index);
+    void onCboCityChanged(int index);
+
+    void onLineEditChanged(QString s);
 
 private:
     Ui::Widget *ui;
+
 };
 #endif // WIDGET_H
