@@ -17,6 +17,11 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 
+private slots:
+    void on_dsbPrice_valueChanged(double arg1);
+
+    void on_sbWeight_valueChanged(int arg1);
+
 private:
     Ui::Widget *ui;
 };
