@@ -2,6 +2,7 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,5 +20,8 @@ public:
 
 private:
     Ui::Widget *ui;
+
+    QTimer* mTimerDownload;
+    QTimer* mTimerCopy;
 };
 #endif // WIDGET_H
