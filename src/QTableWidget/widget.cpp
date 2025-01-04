@@ -145,3 +145,30 @@ Widget::~Widget()
     delete ui;
 }
 
+
+void Widget::appendOneRow(QString name, QString gender, int age, QString province)
+{
+    // 获取当前行数
+    int count = ui->twStudent->rowCount();
+
+    qDebug() << "current count:" << count;
+
+    // 设置当前行数
+    ui->twStudent->setRowCount(count + 1);
+
+    QTableWidgetItem *nameItem = new QTableWidgetItem(name);
+    QTableWidgetItem *genderItem = new QTableWidgetItem(gender);
+    QTableWidgetItem *ageItem = new QTableWidgetItem(QString::number(age));
+    QTableWidgetItem *provinceItem = new QTableWidgetItem(province);
+
+    nameItem->setTextAlignment(Qt::AlignCenter);
+    genderItem->setTextAlignment(Qt::AlignCenter);
+    ageItem->setTextAlignment(Qt::AlignCenter);
+    provinceItem->setTextAlignment(Qt::AlignCenter);
+
+    ui->twStudent->setItem(count, 0,     nameItem);
+    ui->twStudent->setItem(count, 1,   genderItem);
+    ui->twStudent->setItem(count, 2,      ageItem);
+    ui->twStudent->setItem(count, 3, provinceItem);
+}
+
