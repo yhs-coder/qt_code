@@ -172,3 +172,38 @@ void Widget::appendOneRow(QString name, QString gender, int age, QString provinc
     ui->twStudent->setItem(count, 3, provinceItem);
 }
 
+
+void Widget::insertOneRow(int     row,
+                          QString name,
+                          QString gender,
+                          int     age,
+                          QString province)
+{
+    ui->twStudent->insertRow(row);
+
+    // 上面 insertRow 只是插入一个空行，需要手动添加每个单元格的内容
+    QTableWidgetItem *nameItem = new QTableWidgetItem(name);
+    QTableWidgetItem *genderItem = new QTableWidgetItem(gender);
+    QTableWidgetItem *ageItem = new QTableWidgetItem(QString::number(age));
+    QTableWidgetItem *provinceItem = new QTableWidgetItem(province);
+
+    nameItem->setTextAlignment(Qt::AlignCenter);
+    genderItem->setTextAlignment(Qt::AlignCenter);
+    ageItem->setTextAlignment(Qt::AlignCenter);
+    provinceItem->setTextAlignment(Qt::AlignCenter);
+
+    ui->twStudent->setItem(row, 0,     nameItem);
+    ui->twStudent->setItem(row, 1,   genderItem);
+    ui->twStudent->setItem(row, 2,      ageItem);
+    ui->twStudent->setItem(row, 3, provinceItem);
+}
+
+void Widget::on_btnAppend_clicked()
+{
+    QString name = ui->leName->text();
+    QString gender = ui->leGender->text();
+    int     age = ui->leAge->text().toInt();
+    QString province = ui->leProvince->text();
+
+    appendOneRow(name, gender, age, province);
+}
