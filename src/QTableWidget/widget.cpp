@@ -207,3 +207,24 @@ void Widget::on_btnAppend_clicked()
 
     appendOneRow(name, gender, age, province);
 }
+
+void Widget::on_btnInsert_clicked()
+{
+    QString name = ui->leName->text();
+    QString gender = ui->leGender->text();
+    int     age = ui->leAge->text().toInt();
+    QString province = ui->leProvince->text();
+
+    // 获取当前选中的行号
+    int currentRow = ui->twStudent->currentRow();
+
+    insertOneRow(currentRow, name, gender, age, province);
+}
+
+void Widget::on_btnDelete_clicked()
+{
+    // 获取当前选中的行号
+    int currentRow = ui->twStudent->currentRow();
+
+    ui->twStudent->removeRow(currentRow);
+}
