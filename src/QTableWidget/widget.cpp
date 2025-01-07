@@ -228,3 +228,18 @@ void Widget::on_btnDelete_clicked()
 
     ui->twStudent->removeRow(currentRow);
 }
+
+
+void Widget::onSelectionRadioButtonClicked()
+{
+    int checkedId = mButtonGroupSelection->checkedId();
+
+    if (checkedId == 0) {
+        ui->twStudent->setSelectionMode(QAbstractItemView::SingleSelection);
+        ui->twStudent->setSelectionBehavior(QAbstractItemView::SelectItems);
+    } else if (checkedId == 1) {
+        ui->twStudent->setSelectionMode(QAbstractItemView::SingleSelection);
+        ui->twStudent->setSelectionBehavior(QAbstractItemView::SelectRows);
+    }
+}
+
