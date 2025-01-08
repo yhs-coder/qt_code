@@ -230,6 +230,96 @@ void Widget::on_btnDelete_clicked()
 }
 
 
+
+void Widget::on_btnModify_clicked()
+{
+    QString name = ui->leName->text();
+    QString gender = ui->leGender->text();
+    int     age = ui->leAge->text().toInt();
+    QString province = ui->leProvince->text();
+
+    // 获取当前选中的行号
+    int currentRow = ui->twStudent->currentRow();
+
+    QTableWidgetItem *nameItem = new QTableWidgetItem(name);
+    QTableWidgetItem *genderItem = new QTableWidgetItem(gender);
+    QTableWidgetItem *ageItem = new QTableWidgetItem(QString::number(age));
+    QTableWidgetItem *provinceItem = new QTableWidgetItem(province);
+
+    nameItem->setTextAlignment(Qt::AlignCenter);
+    genderItem->setTextAlignment(Qt::AlignCenter);
+    ageItem->setTextAlignment(Qt::AlignCenter);
+    provinceItem->setTextAlignment(Qt::AlignCenter);
+
+    ui->twStudent->setItem(currentRow, 0,     nameItem);
+    ui->twStudent->setItem(currentRow, 1,   genderItem);
+    ui->twStudent->setItem(currentRow, 2,      ageItem);
+    ui->twStudent->setItem(currentRow, 3, provinceItem);
+}
+
+void Widget::onItemClicked(QTableWidgetItem *item)
+{
+    int row = item->row();
+
+    QString name = ui->twStudent->item(row, 0)->text();
+    QString gender = ui->twStudent->item(row, 1)->text();
+    QString age = ui->twStudent->item(row, 2)->text();
+    QString province = ui->twStudent->item(row, 3)->text();
+
+    ui->leName->setText(name);
+    ui->leGender->setText(gender);
+    ui->leAge->setText(age);
+    ui->leProvince->setText(province);
+}
+
+void Widget::on_btnStyleSheet_clicked()
+{
+    QString cellStyle =
+        R"(
+        QTableView
+        {
+            text-align:center;
+            background-color: rgba(255, 255, 255, 0);
+            alternate-background-color:#e3edf9;
+            font:14px "微软雅黑";
+            color:#677483;
+            gridline-color: #ccddf0;
+        }
+    )";
+
+    const QString horizontalHeaderStyle =
+        R"(
+        QHeaderView::section {
+            color: black;
+            font:bold 14px "微软雅黑";
+            text-align:center;
+            height:32px;
+            background-color: #d1dff0;
+            border:1px solid #8faac9;
+            border-left:none;
+        }
+    )";
+
+    const QString verticalHeaderStyle =
+        R"(
+        QHeaderView::section {
+            color: black;
+            font:bold 14px "微软雅黑";
+            width:60px;
+            text-align:center;
+
+            background-color: #d1dff0;
+            border:1px solid #8faac9;
+            border-left:none;
+        }
+    )";
+
+    ui->twStudent->setStyleSheet(cellStyle);
+    ui->twStudent->horizontalHeader()->setStyleSheet(horizontalHeaderStyle);
+    ui->twStudent->verticalHeader()->setStyleSheet(verticalHeaderStyle);
+}
+
+
 void Widget::onSelectionRadioButtonClicked()
 {
     int checkedId = mButtonGroupSelection->checkedId();
