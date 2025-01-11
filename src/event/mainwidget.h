@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QStackedWidget>
+#include <QButtonGroup>
+#include <QPushButton>
 
 class MainWidget : public QWidget
 {
@@ -13,9 +15,13 @@ public:
     ~MainWidget();
 
 private:
+    void initNav();
+
+private:
     QWidget* navWidget;
 
     QWidget* mainWidget;
     QStackedWidget* stackedWidget;
+    QButtonGroup* btnGroup;
 };
 #endif // MAINWIDGET_H
