@@ -31,6 +31,7 @@ MainWidget::MainWidget(QWidget* parent) : QWidget(parent)
     horizontalLayout->addWidget(mainWidget);
 
     initNav();
+    initMain();
 }
 
 void MainWidget::initNav()
@@ -75,6 +76,12 @@ void MainWidget::initNav()
         //将按钮加入到布局
         navWidget->layout()->addWidget(btn);
     }
+}
+
+void MainWidget::initMain()
+{
+    // 逐个添加子窗体
+    stackedWidget->addWidget(new EnterLeaveWidget());
 }
 
 
