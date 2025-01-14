@@ -5,6 +5,7 @@
 #include <QStackedWidget>
 #include <QButtonGroup>
 #include <QPushButton>
+#include "enter_leave_widget.h"
 
 class MainWidget : public QWidget
 {
@@ -16,6 +17,7 @@ public:
 
 private:
     void initNav();
+    void initMain(); // 右侧的子界面
 
 private:
     QWidget* navWidget;
