@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>icon/start.ico</file>
-        <file>icon/stop.ico</file>
-    </qresource>
-</RCC>
