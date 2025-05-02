@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QWidgetDemo</class>
+ <widget class="QWidget" name="QWidgetDemo">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QPushButton" name="btnGetSize">
+     <property name="text">
+      <string>获取窗口位置和大小</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnSetSize">
+     <property name="text">
+      <string>设置窗口大小为： 400 x 400</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnSetFixedSize">
+     <property name="text">
+      <string>设置窗口固定大小为： 500 x 500</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnSetMaxSize">
+     <property name="text">
+      <string>设置窗口最大大小为： 600 x 600</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnSetMinSize">
+     <property name="text">
+      <string>设置窗口最小大小为： 300 x 300</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnMove">
+     <property name="text">
+      <string>移动窗口到（100, 100）</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnSetTitle">
+     <property name="text">
+      <string>设置窗口标题</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnSetIcon">
+     <property name="text">
+      <string>设置图标标题</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
