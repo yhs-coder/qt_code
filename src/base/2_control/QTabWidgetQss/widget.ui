@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Widget</class>
+ <widget class="QWidget" name="Widget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Widget</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_3">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="styleSheet">
+      <string notr="true">
+/* 把显示界面向上移动 */
+QTabWidget::pane {
+    border-top:1px solid #EAEAEA;
+    position:absolute;
+    top:-0.1px;
+    background-color: rgb(246, 213, 255)
+}
+
+QTabBar::tab {
+    width:100px;
+    height:50px;
+    font-size:16px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    background:#FFFFFF;
+    border:2px solid #FFFFFF;
+    border-bottom-color:#FFFFFF;
+    border-top-left-radius:4px;
+    border-top-right-radius:4px;
+    padding:2px;
+}
+
+QTabBar::tab:selected {
+    color:#333333;
+    border-color:#FFFFFF;
+    border-bottom-color:#4BA4F2;
+}
+QTabBar::tab:!selected {
+    color:#B2B2B2;
+    border-color:#FFFFFF;
+    border-bottom-color:#FFFFFF;
+}</string>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>聊天内容</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="pushButton">
+           <property name="text">
+            <string>PushButton</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="toolButton">
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <attribute name="title">
+       <string>用户管理</string>
+      </attribute>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>110</y>
+         <width>221</width>
+         <height>151</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>GroupBox</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>系统权限</string>
+      </attribute>
+      <widget class="QCommandLinkButton" name="commandLinkButton">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>100</y>
+         <width>199</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>CommandLinkButton</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>系统面板</string>
+      </attribute>
+      <widget class="QTimeEdit" name="timeEdit">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>140</y>
+         <width>118</width>
+         <height>28</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
