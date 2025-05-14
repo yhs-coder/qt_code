@@ -16,6 +16,9 @@ set(PROJECT_SOURCES
         main.cpp
         widget.cpp
         widget.h
+        cbasesetwidget.h
+        cbasesetwidget.cpp
+        widget.qrc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

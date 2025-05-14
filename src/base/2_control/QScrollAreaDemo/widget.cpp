@@ -6,7 +6,7 @@
 
 Widget::Widget(QWidget* parent) : QWidget(parent)
 {
-    QVBoxLayout* pVLay = new QVBoxLayout(this);
+    QHBoxLayout* pHLay = new QHBoxLayout(this);
 
     setFixedSize(150 + 1000 + 30 + 15, 900);
     // this->setStyleSheet("background-color:rgb(26, 26, 26)");
@@ -107,13 +107,22 @@ Widget::Widget(QWidget* parent) : QWidget(parent)
     m_pListWidget->setStyleSheet(QString::fromStdString(lw_qss));
 
     m_pScrollArea = new QScrollArea(this);
-    m_pScrollArea->setFixedWidth(1000 + 30);
+    m_pScrollArea->setFixedWidth(1400 + 30);
     m_pScrollArea->setFrameShape(QFrame::NoFrame);
     m_pScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_pScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-    pVLay->addWidget(m_pListWidget);
-    pVLay->addWidget(m_pScrollArea);
+    pHLay->addWidget(m_pListWidget);
+    pHLay->addWidget(m_pScrollArea);
+
+    QWidget*     widget = new QWidget;
+    QVBoxLayout* pVLay  = new QVBoxLayout(widget);
+
+    m_pBaseSetWidget = new CBaseSetWidget;
+    pVLay->addWidget(m_pBaseSetWidget);
+    widget->setLayout(pVLay);
+
+    m_pScrollArea->setWidget(widget);
 }
 
 Widget::~Widget()
@@ -124,5 +133,9 @@ Widget::~Widget()
 
     if (m_pScrollArea) {
         delete m_pScrollArea;
+    }
+
+    if (m_pBaseSetWidget) {
+        delete m_pBaseSetWidget;
     }
 }
