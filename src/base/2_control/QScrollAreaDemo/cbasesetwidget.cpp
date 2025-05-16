@@ -65,21 +65,21 @@ CBaseSetWidget::CBaseSetWidget(QWidget* parent) : QWidget{parent}
     // 垂直布局间隔20px
     pMainVlay->addSpacing(20);
 
-    QHBoxLayout* pHlay1 = new QHBoxLayout(this);
+    QHBoxLayout* pHlay1 = new QHBoxLayout;
     pHlay1->addSpacing(35);
 
-    QVBoxLayout* pVlay1 = new QVBoxLayout(this);
+    QVBoxLayout* pVlay1 = new QVBoxLayout;
     pVlay1->addWidget(pCheckBoot);
     pVlay1->addSpacing(20);
 
-    QHBoxLayout* pHlay2 = new QHBoxLayout(this);
+    QHBoxLayout* pHlay2 = new QHBoxLayout;
     pHlay2->addWidget(pCheckDoNotDisturbMode);
     pHlay2->addWidget(p1);
 
     pVlay1->addLayout(pHlay2);  // 添加免打扰的水平布局
     pVlay1->addSpacing(20);
 
-    QHBoxLayout* pHlay3 = new QHBoxLayout(this);
+    QHBoxLayout* pHlay3 = new QHBoxLayout;
     pHlay3->addWidget(pCheckBosskey);
     pHlay3->addWidget(pLineEdit);
     pHlay3->addWidget(p2);
@@ -93,18 +93,18 @@ CBaseSetWidget::CBaseSetWidget(QWidget* parent) : QWidget{parent}
     pVlay1->addWidget(pDownloadMode);
     pVlay1->addSpacing(20);
 
-    QHBoxLayout* pHlay4 = new QHBoxLayout(this);  //  下载模式下面的水平布局
+    QHBoxLayout* pHlay4 = new QHBoxLayout;  //  下载模式下面的水平布局
     pHlay4->addSpacing(30);
 
-    QVBoxLayout* pVlay2 = new QVBoxLayout(this);
+    QVBoxLayout* pVlay2 = new QVBoxLayout;
 
-    QHBoxLayout* pHlay5 = new QHBoxLayout(this);
+    QHBoxLayout* pHlay5 = new QHBoxLayout;
     pHlay5->addWidget(pFullSpeedDownload);
     pHlay5->addWidget(p2);
     pVlay2->addLayout(pHlay5);
     pVlay2->addSpacing(20);
     // 限速下载
-    QHBoxLayout* pHlay6 = new QHBoxLayout(this);
+    QHBoxLayout* pHlay6 = new QHBoxLayout;
     pHlay6->addWidget(pSpeedLimitDownload);
     pHlay6->addWidget(pBtnModify);
     pHlay6->addWidget(pConfiginfo);

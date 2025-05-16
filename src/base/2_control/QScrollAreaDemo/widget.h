@@ -15,15 +15,25 @@ public:
     Widget(QWidget* parent = nullptr);
     ~Widget();
 
-    // private slots:
-    //     // void slotItemClicked(QListWidgetItem* item);
-    //     // void slotValueChanged(int value);
+private slots:
+    void slotItemClicked(QListWidgetItem* item);
+    void slotValueChanged(int value);
 
 private:
     QListWidget* m_pListWidget = nullptr;
     QScrollArea* m_pScrollArea = nullptr;
     QStringList  m_textList;
 
-    CBaseSetWidget* m_pBaseSetWidget;
+    std::vector<QWidget*> m_vecWidget;
+    CBaseSetWidget*       m_pBaseSetWidget;
+
+    QWidget* m_pYunpanSetWidget;
+    QWidget* m_pDownloadWidget;
+    QWidget* m_pJieguanWidget;
+    QWidget* m_pRenwuWidget;
+    QWidget* m_pTixingWidget;
+    QWidget* m_pXuanfuWidget;
+    // GaojiSetWidget* m_pGaojiWidget;
+    bool signFlag = false;
 };
 #endif  // WIDGET_H
