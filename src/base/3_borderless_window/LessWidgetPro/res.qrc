@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resource/close.svg</file>
+        <file>resource/close_hover.svg</file>
+        <file>resource/max.svg</file>
+        <file>resource/max_hover.svg</file>
+        <file>resource/min.svg</file>
+        <file>resource/min_hover.svg</file>
+        <file>resource/normal.svg</file>
+        <file>resource/normal_hover.svg</file>
+        <file>resource/set.svg</file>
+        <file>resource/set_hover.svg</file>
+        <file>resource/title_icon.png</file>
+    </qresource>
+</RCC>

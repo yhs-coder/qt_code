@@ -18,6 +18,7 @@ set(PROJECT_SOURCES
         widget.h
         ctitlebar.h
         ctitlebar.cpp
+        res.qrc
         # widget.ui
 )
 

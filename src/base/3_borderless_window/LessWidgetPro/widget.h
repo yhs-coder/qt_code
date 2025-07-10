@@ -16,14 +16,19 @@ class Widget : public QWidget
     Q_OBJECT
 
 public:
-    Widget(QWidget* parent = nullptr);
+    Widget(QWidget *parent = nullptr);
     ~Widget();
 
 private:
     void initUI();
+    bool nativeEvent(const QByteArray &eventType, void *message, long *result) override;
+
+private slots:
+    // 关闭窗口
+    void on_closeSlot();
 
 private:
     // Ui::Widget *ui;
-    CTitleBar* m_pTitleBar = nullptr;
+    CTitleBar *m_pTitleBar = nullptr;
 };
 #endif  // WIDGET_H
