@@ -2,22 +2,18 @@
 
 #include <QLabel>
 #include <QVBoxLayout>
+
+#include "text_edit.h"
+
 DragWidget::DragWidget(QWidget* parent) : QWidget{parent}
 {
     QVBoxLayout* verticalLayout = new QVBoxLayout(this);
     verticalLayout->setSpacing(0);
-    verticalLayout->setContentsMargins(0, 0, 0, 0);
+    verticalLayout->setContentsMargins(5, 5, 5, 5);
 
-    QLabel* label = new QLabel(this);
-    label->setText("拖动事件");
-    label->setFrameShape(QFrame::Box);
-    label->setFixedHeight(60);
-    label->setAlignment(Qt::AlignCenter);
-    label->setStyleSheet(R"(
-        background-color: blue;
-        color: white;
-        font-size: 25px
-    )");
+    // 添加一个TextEdit
+    TextEdit* textEdit = new TextEdit(this);
+    textEdit->setPlaceholderText("支持文件以拖放的方式，来打开文件");
 
-    verticalLayout->addWidget(label);
+    verticalLayout->addWidget(textEdit);
 }
