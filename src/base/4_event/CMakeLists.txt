@@ -32,7 +32,11 @@ set(PROJECT_SOURCES
         context_widget.cpp
         propagate_widget.h
         propagate_widget.cpp
-)
+        label.h
+        label.cpp
+        text_edit.h
+        text_edit.cpp
+    )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(event
