@@ -1,5 +1,6 @@
 ﻿#include "timer_widget.h"
 
+#include <QDebug>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QPushButton>
@@ -40,7 +41,7 @@ TimerWidget::TimerWidget(QWidget* parent) : QWidget{parent}
     QPushButton* btnReset = new QPushButton(this);
     btnReset->setText("复位");
 
-    QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+    QHBoxLayout* horizontalLayout = new QHBoxLayout();
     horizontalLayout->setSpacing(20);
     horizontalLayout->setContentsMargins(0, 0, 0, 0);
 
@@ -49,6 +50,8 @@ TimerWidget::TimerWidget(QWidget* parent) : QWidget{parent}
     horizontalLayout->addWidget(btnStop);
     horizontalLayout->addWidget(btnReset);
 
+    // 使用addLayout(),让水平布局的生命周期由垂直布局管理。
+    // 当垂直布局被销毁时，它会自动销毁其所有子布局和子控件，包括水平布局。
     verticalLayout->addLayout(horizontalLayout);
     this->setStyleSheet(R"(
         QPushButton {
