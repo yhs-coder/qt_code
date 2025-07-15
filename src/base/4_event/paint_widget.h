@@ -14,6 +14,8 @@ protected:
     bool eventFilter(QObject* watched, QEvent* event) override;
 
 private:
+    // 绘制温度曲线
+    void paintTemperatureCurve(QWidget* label, const int* temp, const QColor& color);
     // 绘制高低温曲线
     void paintHigh();
     void paintLow();
