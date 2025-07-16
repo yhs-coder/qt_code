@@ -12,6 +12,7 @@ public:
 
 private:
     void mousePressEvent(QMouseEvent* event) override;
+    //  重写事件分发
     bool event(QEvent* e) override;
 };
 
