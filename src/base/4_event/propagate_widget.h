@@ -3,13 +3,19 @@
 
 #include <QWidget>
 
+#include "propagate_label.h"
+
 class PropagateWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit PropagateWidget(QWidget *parent = nullptr);
+    explicit PropagateWidget(QWidget* parent = nullptr);
 
-signals:
+private:
+    void mousePressEvent(QMouseEvent* event) override;
+
+private:
+    PropagateLabel* m_lbl;
 };
 
-#endif // PROPAGATE_WIDGET_H
+#endif  // PROPAGATE_WIDGET_H
