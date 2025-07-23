@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "paintwidget.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class Widget;
@@ -20,4 +22,4 @@ public:
 private:
     Ui::Widget *ui;
 };
-#endif // WIDGET_H
+#endif  // WIDGET_H
