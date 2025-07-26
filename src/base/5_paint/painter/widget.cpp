@@ -1,5 +1,6 @@
 ﻿#include "widget.h"
 
+#include <QColorDialog>
 #include <QDebug>
 
 #include "./ui_widget.h"
@@ -12,7 +13,19 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget)
 
     // 关联信号槽
     void (QComboBox::*pCbo)(const QString &) = &QComboBox::activated;
+    void (QSpinBox::*pSb)(int)               = &QSpinBox::valueChanged;
+    // 图形形状
     connect(ui->cboShape, pCbo, this, &Widget::shapeChange);
+    // 画笔宽度
+    connect(ui->sbPenWidth, pSb, this, &Widget::penChange);
+    // 画笔颜色
+    connect(ui->btnPenColor, &QPushButton::clicked, this, &Widget::onBbtnPenColorClicked);
+    // 画笔样式
+    connect(ui->cboPenStyle, pCbo, this, &Widget::penChange);
+    // 画笔连接
+    connect(ui->cboPenJoin, pCbo, this, &Widget::penChange);
+    // 画笔末端
+    connect(ui->cboPenCap, pCbo, this, &Widget::penChange);
 
     // 默认绘制当前选项的形状
     shapeChange();
@@ -86,6 +99,16 @@ void Widget::initUI()
     ui->cboBrushStyle->addItem(tr("Dense 6"), static_cast<int>(Qt::Dense6Pattern));
     ui->cboBrushStyle->addItem(tr("Dense 7"), static_cast<int>(Qt::Dense7Pattern));
     ui->cboBrushStyle->addItem(tr("None"), static_cast<int>(Qt::NoBrush));
+
+    // 6.初始化画笔颜色
+    // 回显画笔颜色
+    QPalette pal = ui->btnPenColor->palette();
+    pal.setColor(QPalette::Button, QColor(255, 0, 0));
+    ui->btnPenColor->setPalette(pal);
+    ui->btnPenColor->setAutoFillBackground(true);
+    ui->btnPenColor->setFlat(true);
+
+    penChange();
 }
 
 void Widget::shapeChange()
@@ -96,4 +119,47 @@ void Widget::shapeChange()
     ui->paintWidget->setShape(shape);
     // qDebug() << ui->cboShape->itemData(index).toString();
     // qDebug() << ui->cboShape->currentText();
+}
+
+void Widget::penChange()
+{
+    // 获取画笔宽度
+    int width = ui->sbPenWidth->value();
+
+    // 获取画笔颜色
+    QPalette pal   = ui->btnPenColor->palette();
+    QColor   color = pal.color(QPalette::Button);
+
+    int          styleIndex = ui->cboPenStyle->currentIndex();
+    Qt::PenStyle style      = (Qt::PenStyle)ui->cboPenStyle->itemData(styleIndex).toInt();
+
+    int              joinIndex = ui->cboPenJoin->currentIndex();
+    Qt::PenJoinStyle join      = (Qt::PenJoinStyle)ui->cboPenJoin->itemData(joinIndex).toInt();
+
+    int             capIndex = ui->cboPenCap->currentIndex();
+    Qt::PenCapStyle cap      = (Qt::PenCapStyle)ui->cboPenCap->itemData(capIndex).toInt();
+
+    ui->paintWidget->setPen(QPen(color, width, style, cap, join));
+}
+
+void Widget::onBbtnPenColorClicked()
+{
+    // 弹出模态颜色窗口，用于设置颜色
+    QColor color = QColorDialog::getColor(QColor(255, 0, 0), this, "画笔颜色");
+    // 如果用户取消选择颜色对话框，则无效
+    if (!color.isValid()) {
+        return;
+    }
+
+    // 回显画笔颜色
+    // 获取调色板
+    QPalette pal = ui->btnPenColor->palette();
+    // 将指定颜色渲染在按钮上
+    pal.setColor(QPalette::Button, color);
+    // 将配置好的调色板设置回按钮中
+    ui->btnPenColor->setPalette(pal);
+    ui->btnPenColor->setAutoFillBackground(true);
+    // ui->btnPenColor->setFlat(true);
+
+    penChange();
 }

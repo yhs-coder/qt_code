@@ -1,6 +1,7 @@
 ﻿#ifndef PAINTWIDGET_H
 #define PAINTWIDGET_H
 
+#include <QPen>
 #include <QWidget>
 
 // 形状的类型
@@ -31,7 +32,7 @@ class PaintWidget : public QWidget
     Q_OBJECT
 public:
     explicit PaintWidget(QWidget *parent = nullptr);
-
+    void setPen(const QPen &pen);
 public slots:
     void setShape(Shape shape);
 
@@ -40,6 +41,7 @@ protected:
 
 private:
     Shape m_shape;
+    QPen  m_pen;
 };
 
 #endif  // PAINTWIDGET_H

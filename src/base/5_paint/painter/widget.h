@@ -2,6 +2,7 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <Qpen>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -23,6 +24,9 @@ private:
 
 private slots:
     void shapeChange();
+    void penChange();
+
+    void onBbtnPenColorClicked();
 
 private:
     Ui::Widget *ui;
