@@ -1,6 +1,7 @@
 ﻿#ifndef PAINTWIDGET_H
 #define PAINTWIDGET_H
 
+#include <QBrush>
 #include <QPen>
 #include <QWidget>
 
@@ -33,6 +34,8 @@ class PaintWidget : public QWidget
 public:
     explicit PaintWidget(QWidget *parent = nullptr);
     void setPen(const QPen &pen);
+    void setBrush(const QBrush &brush);
+
 public slots:
     void setShape(Shape shape);
 
@@ -40,8 +43,8 @@ protected:
     void paintEvent(QPaintEvent *event);
 
 private:
-    Shape m_shape;
-    QPen  m_pen;
+    Shape  m_shape;
+    QPen   m_pen;
+    QBrush m_brush;
 };
-
 #endif  // PAINTWIDGET_H

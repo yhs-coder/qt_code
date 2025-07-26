@@ -27,6 +27,10 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget)
     // 画笔末端
     connect(ui->cboPenCap, pCbo, this, &Widget::penChange);
 
+    // 画刷颜色
+    connect(ui->btnBrushColor, &QPushButton::clicked, this, &Widget::onBtnBrushColorClicked);
+    connect(ui->cboBrushStyle, pCbo, this, &Widget::brushChange);
+
     // 默认绘制当前选项的形状
     shapeChange();
 }
@@ -108,7 +112,15 @@ void Widget::initUI()
     ui->btnPenColor->setAutoFillBackground(true);
     ui->btnPenColor->setFlat(true);
 
+    // 7. 初始化画刷设置
+    pal = ui->btnBrushColor->palette();
+    pal.setColor(QPalette::Button, QColor(80, 200, 150));
+    ui->btnBrushColor->setPalette(pal);
+    ui->btnBrushColor->setAutoFillBackground(true);
+    ui->btnBrushColor->setFlat(true);
+
     penChange();
+    brushChange();
 }
 
 void Widget::shapeChange()
@@ -162,4 +174,73 @@ void Widget::onBbtnPenColorClicked()
     // ui->btnPenColor->setFlat(true);
 
     penChange();
+}
+
+void Widget::onBtnBrushColorClicked()
+{
+    // 弹出模态颜色窗口，用于设置颜色
+    QColor color = QColorDialog::getColor(QColor(255, 0, 0), this, "画笔颜色");
+    // 如果用户取消选择颜色对话框，则无效
+    if (!color.isValid()) {
+        return;
+    }
+
+    // 回显画刷颜色
+    QPalette pal = ui->btnBrushColor->palette();
+    pal.setColor(QPalette::Button, color);
+    ui->btnBrushColor->setPalette(pal);
+    ui->btnBrushColor->setAutoFillBackground(true);
+    ui->btnBrushColor->setFlat(true);
+
+    brushChange();
+}
+
+void Widget::brushChange()
+{
+    // 获取画刷颜色
+    QPalette pal   = ui->btnBrushColor->palette();
+    QColor   color = pal.color(QPalette::Button);
+
+    // 获取画刷样式
+    int            index = ui->cboBrushStyle->currentIndex();
+    Qt::BrushStyle style = (Qt::BrushStyle)ui->cboBrushStyle->itemData(index).toInt();
+
+    // 设置画刷
+
+    // 线性渐变
+    if (style == Qt::LinearGradientPattern) {
+        // 定义了渐变的起点(0, 50)和终点坐标(100,50)
+        // 这是一条 水平方向 的渐变线，从左到右。
+        QLinearGradient linearGradient(0, 50, 100, 50);
+        // 0% - 20%: 从white逐渐变为color
+        // 20% - 100% : 从color逐渐变为黑色
+        linearGradient.setColorAt(0.0, Qt::white);
+        linearGradient.setColorAt(0.2, color);
+        linearGradient.setColorAt(1.0, Qt::black);
+        ui->paintWidget->setBrush(linearGradient);
+
+    } else if (style == Qt::RadialGradientPattern) {
+        // 线径向渐变
+        QRadialGradient radialGradient(50, 50, 50, 70, 70);
+        radialGradient.setColorAt(0.0, Qt::white);
+        radialGradient.setColorAt(0.2, color);
+        radialGradient.setColorAt(1.0, Qt::black);
+        ui->paintWidget->setBrush(radialGradient);
+
+    } else if (style == Qt::ConicalGradientPattern) {
+        // 锥形渐变
+        // QConicalGradient(qreal cx, qreal cy, qreal startAngle)
+        QConicalGradient conicalGradient(50, 50, 150);
+        conicalGradient.setColorAt(0.0, Qt::white);
+        conicalGradient.setColorAt(0.2, color);
+        conicalGradient.setColorAt(1.0, Qt::black);
+        ui->paintWidget->setBrush(conicalGradient);
+
+    } else if (style == Qt::TexturePattern) {
+        // 纹理样式
+        ui->paintWidget->setBrush(QBrush(QPixmap(":/images/brick.png")));
+    } else {
+        // 其他
+        ui->paintWidget->setBrush(QBrush(color, style));
+    }
 }

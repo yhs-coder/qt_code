@@ -27,6 +27,7 @@ void PaintWidget::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     // 设置画笔
     painter.setPen(m_pen);
+    painter.setBrush(m_brush);
 
     // QRect(int left, int top, int width, int height) noexcept;
     // 在左上角的顶点(10,20)
@@ -73,5 +74,11 @@ void PaintWidget::paintEvent(QPaintEvent *event)
 void PaintWidget::setPen(const QPen &pen)
 {
     m_pen = pen;
+    update();
+}
+
+void PaintWidget::setBrush(const QBrush &brush)
+{
+    m_brush = brush;
     update();
 }
