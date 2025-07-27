@@ -35,6 +35,7 @@ public:
     explicit PaintWidget(QWidget *parent = nullptr);
     void setPen(const QPen &pen);
     void setBrush(const QBrush &brush);
+    void setTransform(bool transform);
 
 public slots:
     void setShape(Shape shape);
@@ -48,5 +49,6 @@ private:
     QPen   m_pen;
     QBrush m_brush;
     bool   m_antialias;
+    bool   m_transform;
 };
 #endif  // PAINTWIDGET_H

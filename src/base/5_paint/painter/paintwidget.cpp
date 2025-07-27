@@ -43,7 +43,7 @@ void PaintWidget::paintEvent(QPaintEvent *event)
 
     // QRect(int left, int top, int width, int height) noexcept;
     // 在左上角的顶点(10,20)
-    QRect rect(10, 20, 100, 60);
+    QRect rect(10, 20, 80, 60);
 
     QRect rect2(10, 10, 80, 80);
 
@@ -70,6 +70,27 @@ void PaintWidget::paintEvent(QPaintEvent *event)
             painter.save();
             // 按给定的偏移量转换坐标系
             painter.translate(x, y);
+
+            // 转换
+            if (m_transform) {
+#if 1
+                // 先缩放再平移，才能达到绕原图中心旋转缩放的效果
+                // 转换坐标系
+                painter.translate(50, 50);
+                // 旋转90°
+                painter.rotate(90.0);
+                // 缩放为原来的0.6
+                painter.scale(0.6, 0.6);
+                // 再次转换坐标系
+                painter.translate(-50, -50);
+#else
+                // 不能达到绕原图中心旋转缩放的效果
+                painter.rotate(90.0);
+                painter.translate(0, -100);
+                painter.scale(0.6, 0.6);
+#endif
+            }
+
             switch (m_shape) {
                 case _Point:  // 点
                     painter.drawPoints(points, 4);
@@ -139,5 +160,11 @@ void PaintWidget::setPen(const QPen &pen)
 void PaintWidget::setBrush(const QBrush &brush)
 {
     m_brush = brush;
+    update();
+}
+
+void PaintWidget::setTransform(bool transform)
+{
+    m_transform = transform;
     update();
 }

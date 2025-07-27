@@ -34,6 +34,9 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget)
     // 抗锯齿
     connect(ui->chkAntialiasing, &QCheckBox::toggled, this, &Widget::antialiasChange);
 
+    // 平移、旋转、缩放
+    connect(ui->chkTransformation, &QCheckBox::toggled, this, &Widget::transformChange);
+
     // 默认绘制当前选项的形状
     shapeChange();
 }
@@ -249,3 +252,5 @@ void Widget::brushChange()
 }
 
 void Widget::antialiasChange() { ui->paintWidget->setAntialias(ui->chkAntialiasing->isChecked()); }
+
+void Widget::transformChange() { ui->paintWidget->setTransform(ui->chkTransformation->isChecked()); }

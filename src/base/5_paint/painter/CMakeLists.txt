@@ -19,6 +19,7 @@ set(PROJECT_SOURCES
         widget.ui
         paintwidget.h
         paintwidget.cpp
+        painter.qrc
 )
 
 

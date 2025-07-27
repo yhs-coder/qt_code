@@ -30,6 +30,7 @@ private slots:
     void onBtnBrushColorClicked();
     void brushChange();
     void antialiasChange();
+    void transformChange();
 
 private:
     Ui::Widget *ui;
