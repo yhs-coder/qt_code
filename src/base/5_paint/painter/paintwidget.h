@@ -38,6 +38,7 @@ public:
 
 public slots:
     void setShape(Shape shape);
+    void setAntialias(bool antialias);
 
 protected:
     void paintEvent(QPaintEvent *event);
@@ -46,5 +47,6 @@ private:
     Shape  m_shape;
     QPen   m_pen;
     QBrush m_brush;
+    bool   m_antialias;
 };
 #endif  // PAINTWIDGET_H

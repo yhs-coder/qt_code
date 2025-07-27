@@ -1,6 +1,7 @@
 ﻿#include "paintwidget.h"
 
 #include <QPainter>
+#include <QPainterPath>
 
 PaintWidget::PaintWidget(QWidget *parent) : QWidget{parent} { this->setAttribute(Qt::WA_StyledBackground, true); }
 
@@ -10,6 +11,12 @@ void PaintWidget::setShape(Shape shape)
 
     // 更新部件，调用paintEvent来处理，完成界面的刷新
     this->update();
+}
+
+void PaintWidget::setAntialias(bool antialias)
+{
+    m_antialias = antialias;
+    update();
 }
 
 void PaintWidget::paintEvent(QPaintEvent *event)
@@ -29,9 +36,14 @@ void PaintWidget::paintEvent(QPaintEvent *event)
     painter.setPen(m_pen);
     painter.setBrush(m_brush);
 
+    if (m_antialias) {
+        // 设置抗锯齿
+        painter.setRenderHint(QPainter::Antialiasing, true);
+    }
+
     // QRect(int left, int top, int width, int height) noexcept;
     // 在左上角的顶点(10,20)
-    QRect rect(10, 20, 80, 60);
+    QRect rect(10, 20, 100, 60);
 
     QRect rect2(10, 10, 80, 80);
 
@@ -41,6 +53,14 @@ void PaintWidget::paintEvent(QPaintEvent *event)
     int startAngle = 0 * 16;
     int arcLength  = 90 * 16;
 
+    QPainterPath path;
+    // 移动到指定的点，开始指定路径
+    path.moveTo(20, 80);
+    // 以直线的方式，路径到指定的点
+    path.lineTo(20, 30);
+    // 以贝瑟尔曲线的方式，路径到指定的点
+    // 使用控制点QPoint(80, 0), QPoint(50, 50)，在当前点和结束点之间，绘制一条贝瑟尔曲线
+    path.cubicTo(QPoint(80, 0), QPoint(50, 50), QPoint(80, 80));
     // 整个paintwidget窗口填满绘制的形状
     for (int x = 0; x < this->width(); x += 100) {
         for (int y = 0; y < this->height(); y += 100) {
@@ -82,7 +102,7 @@ void PaintWidget::paintEvent(QPaintEvent *event)
                     // 将80*80的矩形当成外接矩形，在该矩形中画圆弧
                     // startAngle = 30 * 16表示起始角度，是从矩形中心向右为0°，逆时针为正方向
                     // arcLength = 120*16 表示扫过角度：从起始角再逆时针转 120°，因此弧从 30° 画到 150°。
-                    painter.drawRect(rect2);
+                    painter.drawRect(rect2);  // 验证从矩形中画圆弧
                     painter.drawArc(rect2, startAngle, arcLength);
                     break;
                 case _Pie:  // 饼图
@@ -92,6 +112,16 @@ void PaintWidget::paintEvent(QPaintEvent *event)
                 case _Chord:  // 弦图
                     painter.drawRect(rect2);
                     painter.drawChord(rect2, startAngle, arcLength);
+                    break;
+                case _Path:
+                    painter.drawPath(path);
+                    break;
+                case _Text:
+                    // 通过指定矩形来绘制文本
+                    painter.drawText(rect, Qt::AlignCenter, "绘制文本");
+                    break;
+                case _Pixmap:
+                    painter.drawPixmap(10, 10, QPixmap(":/images/qt-logo.png"));
                     break;
             }
             // 恢复painter之前的状态 （painter状态出栈）

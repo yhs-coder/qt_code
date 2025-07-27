@@ -29,6 +29,7 @@ private slots:
     void onBbtnPenColorClicked();
     void onBtnBrushColorClicked();
     void brushChange();
+    void antialiasChange();
 
 private:
     Ui::Widget *ui;

@@ -31,6 +31,9 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget)
     connect(ui->btnBrushColor, &QPushButton::clicked, this, &Widget::onBtnBrushColorClicked);
     connect(ui->cboBrushStyle, pCbo, this, &Widget::brushChange);
 
+    // 抗锯齿
+    connect(ui->chkAntialiasing, &QCheckBox::toggled, this, &Widget::antialiasChange);
+
     // 默认绘制当前选项的形状
     shapeChange();
 }
@@ -244,3 +247,5 @@ void Widget::brushChange()
         ui->paintWidget->setBrush(QBrush(color, style));
     }
 }
+
+void Widget::antialiasChange() { ui->paintWidget->setAntialias(ui->chkAntialiasing->isChecked()); }
