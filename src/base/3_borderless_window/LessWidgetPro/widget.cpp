@@ -8,6 +8,7 @@ Widget::Widget(QWidget* parent) : QWidget(parent)
 // , ui(new Ui::Widget)
 {
     // ui->setupUi(this);
+    // 设置窗口标志为无边框
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowMinMaxButtonsHint);
     initUI();
 
@@ -41,7 +42,8 @@ bool Widget::nativeEvent(const QByteArray& eventType, void* message, long* resul
 void Widget::on_closeSlot()
 {
     this->close();
-    // QMessageBox::StandardButton _exit = QMessageBox::warning(this, "提示", "确定要退出吗", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+    // QMessageBox::StandardButton _exit = QMessageBox::warning(this, "提示", "确定要退出吗", QMessageBox::Yes |
+    // QMessageBox::No, QMessageBox::Yes);
 
     // if (_exit == QMessageBox::Yes) {
     //     this->close();

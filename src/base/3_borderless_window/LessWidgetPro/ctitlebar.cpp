@@ -170,6 +170,7 @@ void CTitleBar::onClicked()
     if (pButton == m_pMinBtn) {
         pWindow->showMinimized();
     } else if (pButton == m_pMaxBtn) {
+        // 当前窗口最大化时，再次点击变为正常大小，否租为最大化
         if (pWindow->isMaximized()) {
             pWindow->showNormal();
             m_pMaxBtn->setStyleSheet(
@@ -186,6 +187,7 @@ void CTitleBar::onClicked()
                 "background-image:url(:/resource/max_hover.svg);border:none;}");
         }
     } else if (pButton == m_pCloseBtn) {
+        // 发射信号，父控件进行关闭窗口处理
         emit sig_close();
     }
 }
