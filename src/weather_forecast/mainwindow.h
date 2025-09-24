@@ -17,7 +17,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public:
+    void contextMenuEvent(QContextMenuEvent *event);
+
 private:
     Ui::MainWindow *ui;
+    QMenu          *mExitMenu;  // 右键退出菜单
+    QAction        *mExitAct;   // 退出的行为
 };
-#endif // MAINWINDOW_H
+#endif  // MAINWINDOW_H
