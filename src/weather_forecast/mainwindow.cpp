@@ -1,5 +1,8 @@
 ﻿#include "mainwindow.h"
 
+#include <QAction>
+#include <QContextMenuEvent>
+
 #include "./ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -18,13 +21,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     mExitMenu->addAction(mExitAct);
 
-    connect(mExitAct, QAction::triggered, this, [=] { qApp->exit(0); });
+    connect(mExitAct, &QAction::triggered, this, [=] { qApp->exit(0); });
 }
 
 MainWindow::~MainWindow() { delete ui; }
 
+// 重写父类的虚函数
+// 父类中默认的实现，是忽略右键菜单事件
+// 重写之后，处理右键菜单
 void MainWindow::contextMenuEvent(QContextMenuEvent *event)
 {
     // 弹出右键菜单
     mExitMenu->exec(QCursor::pos());
+
+    // 事件不再向上传递
+    event->accept();
 }
